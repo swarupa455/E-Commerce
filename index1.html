@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Commerce Website</title>
+  <link rel="stylesheet" href="style1.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+  <header>
+    <h1></h1>
+    <nav>
+      <a href="#" id="home-link">Home</a>
+      <a href="#" id="products-link">Products</a>
+      <a href="#" id="cart-link">Cart</a>
+      <button id="login-btn">Login</button>
+    </nav>
+  </header>
+
+  <!-- Login/Signup Modal -->
+  <div id="auth-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <div id="auth-forms">
+        <div id="login-form" class="form active">
+          <h2>Login</h2>
+          <input type="email" id="login-email" placeholder="Email" required>
+          <input type="password" id="login-password" placeholder="Password" required>
+          <button id="login-submit">Login</button>
+          <p>Don't have an account? <a href="#" id="show-signup">Sign up</a></p>
+        </div>
+
+        <div id="signup-form" class="form">
+          <h2>Sign Up</h2>
+          <input type="text" id="signup-name" placeholder="Full Name" required>
+          <input type="email" id="signup-email" placeholder="Email" required>
+          <input type="password" id="signup-password" placeholder="Password" required>
+          <button id="signup-submit">Sign Up</button>
+          <p>Already have an account? <a href="#" id="show-login">Log in</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-menu-btn">
+       <i class="bx-bx-menu"></i>
+  </div>
+
+  <main>
+    <section id="home" class="page active">
+      <div class="home-background">
+        <h2>Welcome to Our E-Commerce Website</h2>
+        <p>Find amazing products at unbeatable prices. Start exploring today!</p>
+      </div>
+    </section>
+
+    <section id="products" class="page">
+      <h2>Product Listing</h2>
+      <div class="product-list"></div>
+    </section>
+
+    <section id="cart" class="page">
+      <h2>Shopping Cart</h2>
+      <div class="cart-list"></div>
+      <div class="cart-summary">
+        <p>Total: $<span id="cart-total">0.00</span></p>
+        <button id="checkout-btn">Checkout</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 E-Commerce Website</p>
+  </footer>
+
+  <script>
+    document.getElementById("buyButton").addEventListener("click", function() {
+      // Data to send to the backend (e.g., product ID and quantity)
+      const orderData = {
+        productId: 123,
+        quantity: 1,
+      };
+
+      // Sending data to the backend
+      fetch("http://localhost:3000/api/purchase", {
+        method: "POST",  // Send data to backend
+        headers: {
+          "Content-Type": "application/json",  // Inform backend we're sending JSON
+        },
+        body: JSON.stringify(orderData),  // Convert object to JSON string
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+          alert("Order placed successfully!");
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          alert("Failed to place the order. Try again.");
+        });
+    });
+  </script>
+
+  <script src="script1.js"></script>
+</body>
+</html>
